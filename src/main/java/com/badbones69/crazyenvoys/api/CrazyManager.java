@@ -29,13 +29,13 @@ import com.ryderbelserion.vital.paper.api.files.FileManager;
 import com.ryderbelserion.vital.paper.util.PaperMethods;
 import com.ryderbelserion.vital.paper.util.scheduler.FoliaRunnable;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
+import org.bukkit.*;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import com.badbones69.crazyenvoys.util.MsgUtils;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
@@ -44,6 +44,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import com.badbones69.crazyenvoys.config.ConfigManager;
 import com.badbones69.crazyenvoys.config.types.ConfigKeys;
@@ -87,6 +88,7 @@ public class CrazyManager {
 
     private final Map<Block, Tier> activeEnvoys = new HashMap<>();
     private final Map<Location, ScheduledTask> activeSignals = new HashMap<>();
+    private final BossBar bossBar = Bukkit.createBossBar("", BarColor.RED, BarStyle.SOLID);
 
     private final Map<Entity, Block> fallingBlocks = new HashMap<>();
 
@@ -767,6 +769,17 @@ public class CrazyManager {
 
         this.envoyTimeLeft = getEnvoyRunTimeCalendar();
 
+        if (this.config.getProperty(ConfigKeys.envoys_bossbar_status)) {
+            this.bossBar.setColor(BarColor.valueOf(this.config.getProperty(ConfigKeys.envoys_bossbar_color)));
+            this.bossBar.setStyle(BarStyle.valueOf(this.config.getProperty(ConfigKeys.envoys_bossbar_style)));
+
+            for (Player player: Bukkit.getOnlinePlayers()) {
+                this.bossBar.addPlayer(player);
+            }
+
+            updateBossBar();
+        }
+
         return true;
     }
 
@@ -783,6 +796,8 @@ public class CrazyManager {
             resetWarnings();
         }
 
+        this.bossBar.removeAll();
+
         this.coolDownSettings.clearCoolDowns();
     }
 
@@ -793,6 +808,10 @@ public class CrazyManager {
      */
     public List<Tier> getTiers() {
         return this.tiers;
+    }
+
+    public void updateBossBar() {
+        this.bossBar.setTitle(Messages.bossbar_text.getMessage().replaceAll("\\{amount}", String.valueOf(this.activeEnvoys.size())));
     }
 
     /**

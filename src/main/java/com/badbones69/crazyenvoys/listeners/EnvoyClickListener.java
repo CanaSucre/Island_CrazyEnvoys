@@ -182,6 +182,10 @@ public class EnvoyClickListener implements Listener {
                 placeholder.put("{amount}", String.valueOf(this.crazyManager.getActiveEnvoys().size()));
                 Messages.envoys_remaining.broadcastMessage(true, placeholder);
             }
+
+            if (this.config.getProperty(ConfigKeys.envoys_bossbar_status)) {
+                this.crazyManager.updateBossBar();
+            }
         } else {
             EnvoyEndEvent envoyEndEvent = new EnvoyEndEvent(EnvoyEndEvent.EnvoyEndReason.ALL_CRATES_COLLECTED);
             this.plugin.getServer().getPluginManager().callEvent(envoyEndEvent);

@@ -70,7 +70,8 @@ public enum Messages {
     second(MessageKeys.time_placeholder_second),
     envoy_locations(MessageKeys.envoy_locations),
     location_format(MessageKeys.location_format),
-    help(MessageKeys.help, true);
+    help(MessageKeys.help, true),
+    bossbar_text(MessageKeys.bossbarText);
 
     private Property<String> property;
 

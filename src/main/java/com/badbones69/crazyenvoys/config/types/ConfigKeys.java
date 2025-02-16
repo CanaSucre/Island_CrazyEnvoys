@@ -167,6 +167,19 @@ public class ConfigKeys implements SettingsHolder {
     @Comment("Broadcast a message when a player picks up an envoy.")
     public static final Property<Boolean> envoys_announce_player_pickup = newProperty("envoys.announce-player-pickup", true);
 
+
+
+    @Comment("Display a bossbar with remaining envoys.")
+    public static final Property<Boolean> envoys_bossbar_status = newProperty("envoys.bossbar.status", true);
+
+    @Comment("Set the style of the bossbar. (Available: SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20)")
+    public static final Property<String> envoys_bossbar_style = newProperty("envoys.bossbar.style", "SOLID");
+
+    @Comment("Set the color of the bossbar. (Available: BLUE, GREEN, PINK, PURPLE, RED, WHITE, YELLOW)")
+    public static final Property<String> envoys_bossbar_color = newProperty("envoys.bossbar.color", "RED");
+
+
+
     @Comment("If the player should wait before being able to grab another envoy.")
     public static final Property<Boolean> envoys_grab_cooldown_toggle = newProperty("envoys.grab-cooldown.toggle", false);
 

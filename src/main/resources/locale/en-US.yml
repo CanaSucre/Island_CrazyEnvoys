@@ -72,6 +72,7 @@ envoys:
         second: s
     envoy-locations: '&e&lAll Envoy Locations: \n&c[ID], [World]: [X], [Y], [Z] &r{locations}'
     location-format: '\n&8[&3{id}&8] &c{world}: {x}, {y}, {z}'
+    bossbar-text: 'Largage › {amount} caisses restantes'
 misc:
     command-not-found: '{prefix}&cPlease do /crazyenvoys help for more information.'
     player-only: '{prefix}&cOnly players can use that command.'

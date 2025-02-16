@@ -133,6 +133,10 @@ public class MessageKeys implements SettingsHolder {
 
     public static final Property<String> location_format = newProperty("envoys.location-format", "\\n&8[&3{id}&8] &c{world}: {x}, {y}, {z}");
 
+    public static final Property<String> bossbarText = newProperty("envoys.bossbar-text", "Largage › {amount} caisses restantes");
+
+    public static final Property<String> bossbarEnd = newProperty("envoys.bossbar-end", "Largage › L'événement est désormais terminé !");
+
     public static final Property<String> command_not_found = newProperty("misc.command-not-found", "{prefix}&cPlease do /crazyenvoys help for more information.");
 
     public static final Property<String> player_only = newProperty("misc.player-only", "{prefix}&cOnly players can use that command.");
